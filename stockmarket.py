@@ -40,31 +40,31 @@ data_load_state = st.text("Loading data...")
 data = load(selected_stock)
 data_load_state.text("Loading data...Done")
 
-st.subheader("Raw Data")
-st.write(data.tail(10))
+# st.subheader("Raw Data")
+# st.write(data.tail(10))
 
-def plot_raw():
-    fig = go.Figure()
-    fig.add_trace(go.Scatter(x=data['Date'], y=data['Close'], name="Plotting Raw data"))
-    fig.layout.update(title_text="Time series", xaxis_rangeslider_visible=True)
-    st.plotly_chart(fig)
+# def plot_raw():
+#     fig = go.Figure()
+#     fig.add_trace(go.Scatter(x=data['Date'], y=data['Close'], name="Plotting Raw data"))
+#     fig.layout.update(title_text="Time series", xaxis_rangeslider_visible=True)
+#     st.plotly_chart(fig)
 
-plot_raw()
+# plot_raw()
 
-df_train = data[['Date', 'Close']]
-df_train = df_train.rename(columns={"Date": "ds", "Close": "y"})
+# df_train = data[['Date', 'Close']]
+# df_train = df_train.rename(columns={"Date": "ds", "Close": "y"})
 
-m = Prophet()
-m.fit(df_train)
-future = m.make_future_dataframe(periods=period)
-forecast = m.predict(future)
-st.subheader('Forecast Data')
-st.write(forecast.tail())
+# m = Prophet()
+# m.fit(df_train)
+# future = m.make_future_dataframe(periods=period)
+# forecast = m.predict(future)
+# st.subheader('Forecast Data')
+# st.write(forecast.tail())
 
-st.write("Forecast chart")
-fig1 = plot_plotly(m, forecast)
-st.plotly_chart(fig1)
+# st.write("Forecast chart")
+# fig1 = plot_plotly(m, forecast)
+# st.plotly_chart(fig1)
 
-st.write('Components')
-fig2 = m.plot_components(forecast)
-st.write(fig2)
+# st.write('Components')
+# fig2 = m.plot_components(forecast)
+# st.write(fig2)
